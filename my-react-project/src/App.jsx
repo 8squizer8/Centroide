@@ -36,6 +36,7 @@ function App() {
     setBluePoint(null);
     try {
       // --- MUDANÇA AQUI ---
+      // O URL foi atualizado para apontar para o seu backend no Render.
       const response = await fetch("https://centroide-backend.onrender.com/calculate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -60,130 +61,27 @@ function App() {
     <div className="app-container">
       <DarkVeil hueShift={160} />
 
+      {/* ... O resto do seu JSX permanece inalterado ... */}
       {page === "home" && (
         <div className="content">
           <div className="main-section">
-            <SpotlightCard className="info-card">
-              <div className="info-card-content">
-                <h1 className="info-title">Simulador Método Gravítico</h1>
-                <p className="info-sub">
-                  Escolhe um modo para <strong>testar o nosso modelo</strong>.
-                </p>
-              </div>
-            </SpotlightCard>
-            <SpotlightCard className="start-card">
-              <div
-                className="start-card-content"
-                onClick={() => setPage("page2")}
-              >
-                <p>Start (Simulador)</p>
-              </div>
-            </SpotlightCard>
-            <SpotlightCard className="start-card">
-              <div
-                className="start-card-content"
-                onClick={() => setPage("page3")}
-              >
-                <p>Start (com Mapa)</p>
-              </div>
-            </SpotlightCard>
+            <SpotlightCard className="info-card"><div className="info-card-content"><h1 className="info-title">Simulador Método Gravítico</h1><p className="info-sub">Escolhe um modo para <strong>testar o nosso modelo</strong>.</p></div></SpotlightCard>
+            <SpotlightCard className="start-card"><div className="start-card-content" onClick={() => setPage("page2")}><p>Start (Simulador)</p></div></SpotlightCard>
+            <SpotlightCard className="start-card"><div className="start-card-content" onClick={() => setPage("page3")}><p>Start (com Mapa)</p></div></SpotlightCard>
           </div>
         </div>
       )}
       {page === "page2" && (
         <div className="content page2">
           <div className="page2-container">
-            <div className="calc-box">
-              <h4>Calculation Steps</h4>
-              <div className="calc-log">
-                {calcLog.map((line, idx) => (
-                  <p key={idx}>{line}</p>
-                ))}
-              </div>
-            </div>
-            <div className="graph-wrapper">
-              <h2 className="graph-title">Referencial Oxy</h2>
-              <div className="graph-section">
-                <h3 className="y-axis-title">Eixo dos Y</h3>
-                <h3 className="x-axis-title">Eixo dos X</h3>
-                <ReferentialOxy
-                  min={-15}
-                  max={15}
-                  points={boxValues}
-                  bluePoint={bluePoint}
-                />
-              </div>
-            </div>
-            <div className="input-section">
-              <p>Please write a number (1–26):</p>
-              <input
-                type="text"
-                value={numBoxes}
-                onChange={handleNumChange}
-                placeholder="Enter number..."
-              />
-              {error && <p className="error-message">{error}</p>}
-              {boxValues.map((val, idx) => (
-                <div key={idx} className="dynamic-box">
-                  <label>{String.fromCharCode(65 + idx)}:</label>
-                  <span>(</span>
-                  <input
-                    className="coord-input"
-                    type="text"
-                    value={val.x}
-                    onChange={(e) => handleBoxChange(idx, "x", e.target.value)}
-                    placeholder="X"
-                  />
-                  <span> ; </span>
-                  <input
-                    className="coord-input"
-                    type="text"
-                    value={val.y}
-                    onChange={(e) => handleBoxChange(idx, "y", e.target.value)}
-                    placeholder="Y"
-                  />
-                  <span>)</span>
-                  <input
-                    className="coord-input weight-input"
-                    type="text"
-                    value={val.w}
-                    onChange={(e) => handleBoxChange(idx, "w", e.target.value)}
-                    placeholder="W"
-                    title="Peso do cliente"
-                  />
-                </div>
-              ))}
-            </div>
+            <div className="calc-box"><h4>Calculation Steps</h4><div className="calc-log">{calcLog.map((line, idx) => (<p key={idx}>{line}</p>))}</div></div>
+            <div className="graph-wrapper"><h2 className="graph-title">Referencial Oxy</h2><div className="graph-section"><h3 className="y-axis-title">Eixo dos Y</h3><h3 className="x-axis-title">Eixo dos X</h3><ReferentialOxy min={-15} max={15} points={boxValues} bluePoint={bluePoint} /></div></div>
+            <div className="input-section"><p>Please write a number (1–26):</p><input type="text" value={numBoxes} onChange={handleNumChange} placeholder="Enter number..." />{error && <p className="error-message">{error}</p>}{boxValues.map((val, idx) => (<div key={idx} className="dynamic-box"><label>{String.fromCharCode(65 + idx)}:</label><span>(</span><input className="coord-input" type="text" value={val.x} onChange={(e) => handleBoxChange(idx, "x", e.target.value)} placeholder="X" /><span> ; </span><input className="coord-input" type="text" value={val.y} onChange={(e) => handleBoxChange(idx, "y", e.target.value)} placeholder="Y" /><span>)</span><input className="coord-input weight-input" type="text" value={val.w} onChange={(e) => handleBoxChange(idx, "w", e.target.value)} placeholder="W" title="Peso do cliente" /></div>))}</div>
           </div>
-          <div className="buttons-wrapper">
-            <SpotlightCard className="start-card">
-              <div className="start-card-content" onClick={handleGenerate}>
-                <p>Generate</p>
-              </div>
-            </SpotlightCard>
-            <SpotlightCard className="start-card">
-              <div
-                className="start-card-content"
-                onClick={() => {
-                  setPage("home");
-                  setNumBoxes("");
-                  setBoxValues([]);
-                  setError("");
-                  setCalcLog([]);
-                  setBluePoint(null);
-                }}
-              >
-                <p>Home</p>
-              </div>
-            </SpotlightCard>
-          </div>
+          <div className="buttons-wrapper"><SpotlightCard className="start-card"><div className="start-card-content" onClick={handleGenerate}><p>Generate</p></div></SpotlightCard><SpotlightCard className="start-card"><div className="start-card-content" onClick={() => { setPage("home"); setNumBoxes(""); setBoxValues([]); setError(""); setCalcLog([]); setBluePoint(null);}}><p>Home</p></div></SpotlightCard></div>
         </div>
       )}
-      {page === "page3" && (
-        <div className="content">
-          <MapPage onGoHome={() => setPage("home")} />
-        </div>
-      )}
+      {page === "page3" && (<div className="content"><MapPage onGoHome={() => setPage("home")} /></div>)}
     </div>
   );
 }
