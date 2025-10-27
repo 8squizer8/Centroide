@@ -65,9 +65,9 @@ function App() {
       {page === "home" && (
         <div className="content">
           <div className="main-section">
-            <SpotlightCard className="info-card"><div className="info-card-content"><h1 className="info-title">Simulador Método Gravítico</h1><p className="info-sub">Escolhe um modo para <strong>testar o nosso modelo</strong>.</p></div></SpotlightCard>
-            <SpotlightCard className="start-card"><div className="start-card-content" onClick={() => setPage("page2")}><p>Start (Simulador)</p></div></SpotlightCard>
-            <SpotlightCard className="start-card"><div className="start-card-content" onClick={() => setPage("page3")}><p>Start (com Mapa)</p></div></SpotlightCard>
+            <SpotlightCard className="info-card"><div className="info-card-content"><h1 className="info-title">Método do Centro Gravítico</h1><p className="info-sub">Escolhe um modo para <strong>testar o modelo de localização</strong>.</p></div></SpotlightCard>
+            <SpotlightCard className="start-card"><div className="start-card-content" onClick={() => setPage("page2")}><p>Start (Simulador num Referencial 2D)</p></div></SpotlightCard>
+            <SpotlightCard className="start-card"><div className="start-card-content" onClick={() => setPage("page3")}><p>Start (Simulador no Mapa)</p></div></SpotlightCard>
           </div>
         </div>
       )}
