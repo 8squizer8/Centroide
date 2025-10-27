@@ -1,4 +1,4 @@
-// Substitua todo o conteúdo de: src/App.jsx (Opção B - Corrigida)
+// Substitua todo o conteúdo de: src/App.jsx
 
 import React, { useState } from "react";
 import DarkVeil from "./DarkVeil";
@@ -15,21 +15,13 @@ function App() {
   const [calcLog, setCalcLog] = useState([]);
   const [bluePoint, setBluePoint] = useState(null);
 
-  // --- FUNÇÕES COMPLETAS E CORRIGIDAS ---
   const handleNumChange = (e) => {
     const value = e.target.value;
     setNumBoxes(value);
     setError("");
     const num = parseInt(value);
-    if (!value) {
-      setBoxValues([]);
-      return;
-    }
-    if (isNaN(num) || num < 1 || num > 26) {
-      setError("It needs to be an integer from 1 to 26!");
-      setBoxValues([]);
-      return;
-    }
+    if (!value) { setBoxValues([]); return; }
+    if (isNaN(num) || num < 1 || num > 26) { setError("It needs to be an integer from 1 to 26!"); setBoxValues([]); return; }
     setBoxValues(Array(num).fill({ x: "", y: "", w: "" }));
   };
 
@@ -43,7 +35,8 @@ function App() {
     setCalcLog([]);
     setBluePoint(null);
     try {
-      const response = await fetch("http://127.0.0.1:5000/calculate", {
+      // --- MUDANÇA AQUI ---
+      const response = await fetch("https://centroide-backend.onrender.com/calculate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -62,11 +55,9 @@ function App() {
       setCalcLog(["Erro ao comunicar com o servidor"]);
     }
   };
-  // --- FIM DAS FUNÇÕES CORRIGIDAS ---
 
   return (
     <div className="app-container">
-      {/* MUDANÇA: hueShift ajustado para tons de verde/ciano */}
       <DarkVeil hueShift={160} />
 
       {page === "home" && (

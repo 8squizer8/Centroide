@@ -1,3 +1,5 @@
+// Substitua todo o conteúdo de: src/MapPage.jsx
+
 import React, { useState, useRef, useEffect } from 'react';
 import { GoogleMap, useJsApiLoader, Marker, Autocomplete } from '@react-google-maps/api';
 import './MapPage.css';
@@ -105,7 +107,8 @@ function MapPage({ onGoHome }) {
     setResultPoint(null);
     setError('');
     try {
-      const response = await fetch("http://127.0.0.1:5000/calculate-geo", {
+      // --- MUDANÇA AQUI ---
+      const response = await fetch("https://centroide-backend.onrender.com/calculate-geo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
